@@ -1,1 +1,5 @@
-// app global css in SCSS form
+@import 'imports/mixins';
+@import 'imports/vars';
+@import 'imports/theme';
+@import 'imports/plugin_vegas';
+@import 'imports/plugins_overrides';
