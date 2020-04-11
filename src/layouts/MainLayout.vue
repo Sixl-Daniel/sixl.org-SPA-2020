@@ -24,6 +24,9 @@
 
                     <q-item-label header>Externe Links</q-item-label>
                     <MainMenuLink v-for="link in linksExternal" :key="link.title" v-bind="link" />
+
+                    <q-item-label header>Kontakt</q-item-label>
+                    <MainMenuLink v-for="link in linksContact" :key="link.title" v-bind="link" />
                 </q-list>
             </q-scroll-area>
             <q-img
@@ -112,6 +115,26 @@ export default {
                     icon: "fas fa-fire",
                     link: "https://poi-kurs.de/",
                     target: "_blank"
+                }
+            ],
+            linksContact: [
+                {
+                    title: "Telefon",
+                    caption: "+49 911 92370377",
+                    icon: "fas fa-phone",
+                    link: "tel:+4991192370377"
+                },
+                {
+                    title: "Mobil",
+                    caption: "+49 176 56896000",
+                    icon: "fas fa-mobile-alt",
+                    link: "tel:+4917656896000"
+                },
+                {
+                    title: "E-Mail",
+                    caption: "sixl@sixl.org",
+                    icon: "fas fa-at",
+                    link: "sixl@sixl.org"
                 }
             ]
         };
