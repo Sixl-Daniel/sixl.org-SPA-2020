@@ -33,6 +33,7 @@
                 id="profile-image-bg"
                 class="absolute-top"
                 src="/statics/img/profile/profile-bg.jpg"
+                draggable="false"
             >
                 <div class="absolute-bottom bg-transparent text-right">
                     <div class="text-weight-bold">Daniel Sixl</div>
