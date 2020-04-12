@@ -93,6 +93,7 @@ p:last-of-type {
     font-weight: 700;
     transition: color 300ms linear;
     text-decoration: none;
+    @include word-wrap;
 
     &:hover {
       color: var(--q-color-primary);
