@@ -6,26 +6,6 @@ body.body--dark {
   background: #121212 url('/statics/img/graphics/static.webp') repeat fixed;
 }
 
-#logo-text {
-  width: 66.666%;
-  height: auto;
-  max-width: 270px;
-  filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.6));
-}
-
-.q-drawer.q-drawer--dark {}
-
-.q-scrollarea {
-  width: 100%;
-  height: calc(100% - 200px);
-  margin-top: 200px;
-
-}
-
-#profile-image-bg {
-  height: 200px;
-}
-
 blockquote {
   position: relative;
   padding: 2rem;
@@ -37,6 +17,36 @@ blockquote {
 p:last-of-type {
   margin-bottom: 0;
 }
+
+/*
+ * front
+ */
+
+#logo-text {
+  width: 66.666%;
+  height: auto;
+  max-width: 270px;
+  filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.6));
+}
+
+/*
+ * drawer
+ */
+
+#profile-image-bg {
+  height: 200px;
+}
+
+.q-scrollarea {
+  width: 100%;
+  height: calc(100% - 200px);
+  margin-top: 200px;
+
+}
+
+/*
+ * content
+ */
 
 .content-wrapper {
 
