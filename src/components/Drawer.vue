@@ -37,7 +37,11 @@ import SocialLink from "components/SocialLink";
 export default {
     name: "Drawer",
 
-    props: ["open"],
+    props: {
+        open: {
+            type: Boolean
+        }
+    },
 
     model: {
         prop: "open"
