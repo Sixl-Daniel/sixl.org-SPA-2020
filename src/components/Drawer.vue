@@ -1,5 +1,5 @@
 <template>
-    <q-drawer v-model="open" side="right">
+    <q-drawer :model-value="modelValue" @update:model-value="$emit('update:modelValue', $event)" side="right">
         <q-scroll-area>
             <div class="q-pa-md q-gutter-sm text-center">
                 <SocialLink v-for="link in linksSocial" :key="link.link" v-bind="link" />
@@ -38,14 +38,12 @@ export default {
     name: "Drawer",
 
     props: {
-        open: {
+        modelValue: {
             type: Boolean
         }
     },
 
-    model: {
-        prop: "open"
-    },
+    emits: ['update:modelValue'],
 
     components: {
         MainMenuLink,
@@ -90,9 +88,9 @@ export default {
             linksContact: [
                 {
                     title: "Telefon",
-                    caption: "+49 911 92370377",
+                    caption: "+49 911 18070408",
                     icon: "fas fa-phone",
-                    link: "tel:+4991192370377"
+                    link: "tel:+4991118070408"
                 },
                 {
                     title: "Mobil",

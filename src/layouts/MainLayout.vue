@@ -3,7 +3,7 @@
         <q-header reveal elevated class="bg-primary text-white">
             <q-toolbar>
                 <q-avatar>
-                    <img src="statics/img/graphics/logo_tomoe_s.svg" />
+                    <img src="/statics/img/graphics/logo_tomoe_s.svg" />
                 </q-avatar>
                 <q-toolbar-title>
                     <span>Daniel Sixl</span>
@@ -19,9 +19,10 @@
             </q-toolbar>
         </q-header>
 
-        <drawer :open="rightDrawerOpen" />
+        <drawer v-model="rightDrawerOpen" />
 
         <q-page-container>
+            <router-view v-slot="{ Component }">
             <transition
                 appear
                 name="transitions"
@@ -29,8 +30,9 @@
                 leave-active-class="animated fadeOut"
                 mode="out-in"
             >
-                <router-view class="router-view"></router-view>
+                <component :is="Component" class="router-view" />
             </transition>
+            </router-view>
             <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
                 <q-btn fab icon="fas fa-arrow-up" color="primary"></q-btn>
             </q-page-scroller>

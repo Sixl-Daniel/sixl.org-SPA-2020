@@ -23,9 +23,9 @@ const routes = [{
 }]
 
 // Always leave this as last one
-if (process.env.MODE !== 'ssr') {
+{
   routes.push({
-    path: '*',
+    path: '/:pathMatch(.*)*',
     component: PageError404
   })
 }
