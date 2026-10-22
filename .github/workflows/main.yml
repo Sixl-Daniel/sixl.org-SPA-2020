@@ -53,12 +53,22 @@ jobs:
           );
           NODE
 
-      - name: Sync files over SFTP to webgo
+      - name: Upload website files
         uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server: ${{ secrets.FTP_SERVER }}
           port: 22
-          local_path: './dist/spa/'
+          local_path: './dist/spa/*'
+          remote_path: '/home/www/sixl.org/website-quasar-2026'
+
+      - name: Upload Apache configuration
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+        with:
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server: ${{ secrets.FTP_SERVER }}
+          port: 22
+          local_path: './dist/spa/.htaccess'
           remote_path: '/home/www/sixl.org/website-quasar-2026'
