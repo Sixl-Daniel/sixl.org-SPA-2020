@@ -26,7 +26,7 @@ jobs:
         run: npm run build
 
       - name: Sync files over SFTP to webgo
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
@@ -34,4 +34,3 @@ jobs:
           port: 22
           local_path: './dist/spa/'
           remote_path: '/home/www/sixl.org/website-quasar-2026'
-          dotfiles: true
