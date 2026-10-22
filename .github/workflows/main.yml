@@ -23,15 +23,14 @@ jobs:
         run: npm ci
 
       - name: Build Quasar App
-        run: npm run build
+        run: npx quasar build
 
-      - name: Sync files over SFTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: Sync files over SFTP to webgo
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: sftp
-          port: 22                                # Wichtig für SFTP bei webgo
-          local-dir: ./dist/spa/
-          server-dir: /home/www/sixl.org/website-quasar-2026/
+          server: ${{ secrets.FTP_SERVER }}
+          port: 22
+          local_path: './dist/spa/*'
+          remote_path: '/home/www/sixl.org/website-quasar-2026'
