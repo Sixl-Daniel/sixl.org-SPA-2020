@@ -6,3 +6,10 @@
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^ index.html [L]
 </IfModule>
+
+# Prevent indexing of build information.
+<IfModule mod_headers.c>
+  <Files "build-info.json">
+    Header set X-Robots-Tag "noindex"
+  </Files>
+</IfModule>
