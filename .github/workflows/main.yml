@@ -32,6 +32,6 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server: ${{ secrets.FTP_SERVER }}
           port: 22
-          local_path: './dist/spa/*'
+          local_path: './dist/spa/'
           remote_path: '/home/www/sixl.org/website-quasar-2026'
           dotfiles: true
