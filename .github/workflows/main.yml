@@ -26,6 +26,32 @@ jobs:
       - name: Build Quasar App
         run: npm run build
 
+      - name: Create build information
+        env:
+          BUILD_COMMIT: ${{ github.sha }}
+          BUILD_BRANCH: ${{ github.ref_name }}
+          BUILD_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          BUILD_RUN_NUMBER: ${{ github.run_number }}
+          BUILD_RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          node --input-type=module <<'NODE'
+          import { writeFileSync } from 'node:fs';
+
+          const buildInfo = {
+            builtAt: new Date().toISOString(),
+            commit: process.env.BUILD_COMMIT,
+            branch: process.env.BUILD_BRANCH,
+            runNumber: process.env.BUILD_RUN_NUMBER,
+            runAttempt: process.env.BUILD_RUN_ATTEMPT,
+            runUrl: process.env.BUILD_RUN_URL
+          };
+
+          writeFileSync(
+            'dist/spa/build-info.json',
+            JSON.stringify(buildInfo, null, 2) + '\n'
+          );
+          NODE
+
       - name: Sync files over SFTP to webgo
         uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
