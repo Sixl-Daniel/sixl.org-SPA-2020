@@ -93,12 +93,6 @@ export default {
                     link: "tel:+4991118070408"
                 },
                 {
-                    title: "Mobil",
-                    caption: "+49 176 56896000",
-                    icon: "fas fa-mobile-alt",
-                    link: "tel:+4917656896000"
-                },
-                {
                     title: "E-Mail",
                     caption: "sixl@sixl.org",
                     icon: "fas fa-at",
