@@ -6,13 +6,13 @@
         <h1 class>Impressum</h1>
         <p>
             Daniel Sixl
-            <br />Krelingstraße 11
+            <br />Friedrichstraße 54
             <br />90408 Nürnberg
         </p>
         <p>
             Telefon
             <br />
-            <a href="tel:+4991192370377">+49 (0) 911 92370377</a>
+            <a href="tel:+4991118070408">+49 (0) 911 18070408</a>
         </p>
         <p>
             E-Mail
