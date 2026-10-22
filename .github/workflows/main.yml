@@ -38,8 +38,21 @@ jobs:
           node --input-type=module <<'NODE'
           import { writeFileSync } from 'node:fs';
 
+          const now = new Date();
+
           const buildInfo = {
-            builtAt: new Date().toISOString(),
+            builtAt: now.toISOString(),
+            builtAtLocal: new Intl.DateTimeFormat('de-DE', {
+              timeZone: 'Europe/Berlin',
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+              timeZoneName: 'short'
+            }).format(now),
+            timeZone: 'Europe/Berlin',
             commit: process.env.BUILD_COMMIT,
             branch: process.env.BUILD_BRANCH,
             runNumber: process.env.BUILD_RUN_NUMBER,
@@ -53,12 +66,22 @@ jobs:
           );
           NODE
 
-      - name: Sync files over SFTP to webgo
+      - name: Upload website files
         uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server: ${{ secrets.FTP_SERVER }}
           port: 22
-          local_path: './dist/spa/'
+          local_path: './dist/spa/*'
+          remote_path: '/home/www/sixl.org/website-quasar-2026'
+
+      - name: Upload Apache configuration
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+        with:
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server: ${{ secrets.FTP_SERVER }}
+          port: 22
+          local_path: './dist/spa/.htaccess'
           remote_path: '/home/www/sixl.org/website-quasar-2026'
