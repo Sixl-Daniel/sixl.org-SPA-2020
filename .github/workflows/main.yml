@@ -4,16 +4,29 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-webgo-production
+  cancel-in-progress: false
 
 jobs:
   build-and-deploy:
-    name: Build Quasar and sync to webgo
+    name: Build website and deploy to webgo
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
-    steps:
-      - name: Get latest code
-        uses: actions/checkout@v4
+    timeout-minutes: 15
 
-      - name: Setup Node.js
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '24'
@@ -22,15 +35,34 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Quasar App
+      - name: Build website
         run: npm run build
 
-      - name: Sync files over SFTP to webgo
+      - name: Verify build output
+        run: |
+          for file in dist/spa/index.html dist/spa/.htaccess; do
+            if [ ! -s "$file" ]; then
+              echo "::error::Missing or empty file: $file"
+              exit 1
+            fi
+          done
+
+      - name: Upload website files
         uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server: ${{ secrets.FTP_SERVER }}
           port: 22
-          local_path: './dist/spa/'
+          local_path: './dist/spa/*'
+          remote_path: '/home/www/sixl.org/website-quasar-2026'
+
+      - name: Upload Apache configuration
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+        with:
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server: ${{ secrets.FTP_SERVER }}
+          port: 22
+          local_path: './dist/spa/.htaccess'
           remote_path: '/home/www/sixl.org/website-quasar-2026'
